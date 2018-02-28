@@ -1,4 +1,3 @@
-
 CXX=g++
 CXXFLAGS=-g -Wall -pedantic -std=c++11
 
