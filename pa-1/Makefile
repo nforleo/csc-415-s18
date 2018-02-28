@@ -1,12 +1,10 @@
-CC=g++
-CFLAGS=-g -Wall -pedantic -std=c++11
+CXX=g++
+CXXFLAGS=-g -Wall -pedantic -std=c++11
 
-TARGET=transpose
+all: transpose
 
-all: $(TARGET)
-
-p1: $(TARGET)
-	$(CC) -o $(TARGET) $(CFLAGS) $(TARGET).cc
+transpose: transpose.o
+	$(CXX) -o $@ $(CXXFLAGS) $^
 
 clean:
-	-rm -rf core *.o *~ $(TARGET)
+	rm -rf transpose core *.o *~
