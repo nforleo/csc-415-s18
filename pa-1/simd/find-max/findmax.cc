@@ -65,7 +65,7 @@ void find_max_avx(float *a, int n, float *max) {
 }
 
 int main(int argc, char **argv) {
-  char hostname[512];
+	char hostname[512];
 	gethostname(hostname, 512);
 	std::cout << "Running on " << hostname << std::endl;
   
