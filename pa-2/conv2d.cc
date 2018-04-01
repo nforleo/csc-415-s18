@@ -70,6 +70,12 @@ void filter_image_seq(uint32 *raster, uint32 w, uint32 h, const float *filter, i
     //
 }
 
+void filter_image_par(uint32 *raster, uint32 w, uint32 h, const float *filter, int f_len, int n_threads) {
+    //
+    // TODO: here you will filter the image in raster using threads
+    //
+}
+
 float *load_filter(const char *fname, int *n) {
     std::ifstream myfile(fname);
     if (! myfile) {
