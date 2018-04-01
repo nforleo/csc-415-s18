@@ -13,5 +13,7 @@
 # necessary for running the AVX2 instructions
 #SBATCH --constraint=gpu
 #
+#
 module load LibTIFF
-srun ./prog images/square.tif out.tif filters/gaussian_blur.txt seq 2
+## the following is just an example, you can add more calls
+srun ./prog images/square.tif out.tif filters/gaussian-blur.txt par 16

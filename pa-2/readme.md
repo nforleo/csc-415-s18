@@ -1,6 +1,11 @@
+Before compilation:
+```bash
+$ module load LibTIFF
+```
+
 Can compile with:
 ```bash
-$ g++ -Wall -std=c++11 conv2d.cc -ltiff -o prog
+$ g++ -std=c++11 -Wall -ltiff conv2d.cc -o prog
 ```
 
 And run with:
