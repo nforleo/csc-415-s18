@@ -24,7 +24,7 @@ __global__ void convolve(int N, float *input, float *output) {
 
 int main(int argc, char* argv[]) {
     // define the size of the input array
-    int N = 135;
+    int N = 1024;
 
     // create pointers for the CPU arrays
     float *input = new float[N+2];

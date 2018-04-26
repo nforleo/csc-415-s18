@@ -13,3 +13,5 @@ And run with:
 ```bash
 $ sbatch myjob.sh
 ```
+
+Please read carefully all lines and comments in `myjob.sh`.
