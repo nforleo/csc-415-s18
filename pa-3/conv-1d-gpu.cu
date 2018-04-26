@@ -44,18 +44,33 @@ int main(int argc, char* argv[]) {
     float *dev_in;
     float *dev_out;
 
+    // variable to check for CUDA errors
+    cudaError_t status;
+
+    // choose GPU to run
+    status = cudaSetDevice(0);
+    if (status != cudaSuccess) std::cerr << "cudaSetDevice failed!" << std::endl;
+
     // allocate space for the arrays in the GPU
-    cudaMalloc(&dev_in, sizeof(float) * (N+2));
-    cudaMalloc(&dev_out, sizeof(float) * N);
+    status = cudaMalloc(&dev_in, sizeof(float) * (N+2));
+    if (status != cudaSuccess) std::cerr << "cudaMalloc (in) failed!" << std::endl;
+    status = cudaMalloc(&dev_out, sizeof(float) * N);
+    if (status != cudaSuccess) std::cerr << "cudaMalloc (out) failed!" << std::endl;
 
     // transfer data from CPU to GPU
-    cudaMemcpy(dev_in, input, sizeof(float) * (N+2), cudaMemcpyHostToDevice);
+    status = cudaMemcpy(dev_in, input, sizeof(float) * (N+2), cudaMemcpyHostToDevice);
+    if (status != cudaSuccess) std::cerr << "cudaMemcpy H2D failed!" << std::endl;
 
     // do the work in the GPU
     convolve<<<std::ceil((float)N/THREADS_PER_BLOCK), THREADS_PER_BLOCK>>>(N, dev_in, dev_out);
 
+    // wait for the kernel to finish, and check for errors
+    status = cudaThreadSynchronize();
+    if (status != cudaSuccess) std::cerr << "error code " << status << " returned after kernel!" << std::endl;
+
     // transfer results from GPU to CPU
-    cudaMemcpy(output, dev_out, sizeof(float) * N, cudaMemcpyDeviceToHost);
+    status = cudaMemcpy(output, dev_out, sizeof(float) * N, cudaMemcpyDeviceToHost);
+    if (status != cudaSuccess) std::cerr << "cudaMemcpy D2H failed!" << std::endl;
 
     print_array(output, N);
 

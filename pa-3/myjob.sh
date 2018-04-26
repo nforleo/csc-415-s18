@@ -14,6 +14,7 @@
 #SBATCH --constraint=gpu
 #
 #
+module load GCC
 module load CUDA
 ## the following is just an example, you can add more calls
 srun ./prog
